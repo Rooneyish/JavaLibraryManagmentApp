@@ -4,17 +4,23 @@
  */
 package com.librarymanagementsystem.view;
 
+import com.librarymanagementsystem.model.LibraryModel;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author ilust
+ * @author Ronish Prajapati
  */
 public class LibraryApp extends javax.swing.JFrame {
-
+    ArrayList<LibraryModel> bookList;
     /**
      * Creates new form view
      */
     public LibraryApp() {
         initComponents();
+        bookList= new ArrayList<>();
     }
 
     /**
@@ -37,9 +43,12 @@ public class LibraryApp extends javax.swing.JFrame {
         txtFldBookTitle = new javax.swing.JTextField();
         chekBtnReadBook = new javax.swing.JCheckBox();
         btnAddBook = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        txtFldBookId = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblBooks = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -109,31 +118,68 @@ public class LibraryApp extends javax.swing.JFrame {
         btnAddBook.setFont(new java.awt.Font("JetBrains Mono", 1, 14)); // NOI18N
         btnAddBook.setForeground(new java.awt.Color(34, 40, 49));
         btnAddBook.setText("Add Book");
+        btnAddBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddBookActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setBackground(new java.awt.Color(238, 238, 238));
+        btnDelete.setFont(new java.awt.Font("JetBrains Mono", 1, 14)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(34, 40, 49));
+        btnDelete.setText("Remove");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setBackground(new java.awt.Color(238, 238, 238));
+        btnUpdate.setFont(new java.awt.Font("JetBrains Mono", 1, 14)); // NOI18N
+        btnUpdate.setForeground(new java.awt.Color(34, 40, 49));
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        txtFldBookId.setBackground(new java.awt.Color(0, 173, 181));
+        txtFldBookId.setFont(new java.awt.Font("JetBrains Mono", 1, 14)); // NOI18N
+        txtFldBookId.setForeground(new java.awt.Color(34, 40, 49));
+        txtFldBookId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFldBookId.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Book Id", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("JetBrains Mono", 1, 14), new java.awt.Color(34, 40, 49))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddBook, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chekBtnReadBook, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblAddBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblAddBook, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
                     .addComponent(txtFldAuthorName, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtFldPages)
-                    .addComponent(txtFldBookTitle))
+                    .addComponent(txtFldBookTitle)
+                    .addComponent(txtFldBookId))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(89, Short.MAX_VALUE)
-                .addComponent(btnAddBook, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(lblAddBook)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtFldBookId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(txtFldBookTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtFldAuthorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -143,20 +189,20 @@ public class LibraryApp extends javax.swing.JFrame {
                 .addComponent(chekBtnReadBook)
                 .addGap(18, 18, 18)
                 .addComponent(btnAddBook)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdate)
+                .addGap(18, 18, 18)
+                .addComponent(btnDelete)
+                .addGap(74, 74, 74))
         );
 
         jPanel2.setBackground(new java.awt.Color(0, 173, 181));
 
-        jTable1.setBackground(new java.awt.Color(57, 62, 70));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblBooks.setBackground(new java.awt.Color(57, 62, 70));
+        tblBooks.setForeground(new java.awt.Color(238, 238, 238));
+        tblBooks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "S.N.", "Book Name", "Author", "Pages", "Status"
@@ -170,21 +216,22 @@ public class LibraryApp extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setFocusable(false);
-        jTable1.setGridColor(new java.awt.Color(238, 238, 238));
-        jTable1.setSelectionBackground(new java.awt.Color(238, 238, 238));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(5);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(70);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(10);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(5);
+        tblBooks.setFocusable(false);
+        tblBooks.setGridColor(new java.awt.Color(238, 238, 238));
+        tblBooks.setSelectionBackground(new java.awt.Color(238, 238, 238));
+        tblBooks.setSelectionForeground(new java.awt.Color(57, 62, 70));
+        jScrollPane1.setViewportView(tblBooks);
+        if (tblBooks.getColumnModel().getColumnCount() > 0) {
+            tblBooks.getColumnModel().getColumn(0).setResizable(false);
+            tblBooks.getColumnModel().getColumn(0).setPreferredWidth(5);
+            tblBooks.getColumnModel().getColumn(1).setResizable(false);
+            tblBooks.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblBooks.getColumnModel().getColumn(2).setResizable(false);
+            tblBooks.getColumnModel().getColumn(2).setPreferredWidth(70);
+            tblBooks.getColumnModel().getColumn(3).setResizable(false);
+            tblBooks.getColumnModel().getColumn(3).setPreferredWidth(10);
+            tblBooks.getColumnModel().getColumn(4).setResizable(false);
+            tblBooks.getColumnModel().getColumn(4).setPreferredWidth(5);
         }
 
         jPanel3.setBackground(new java.awt.Color(0, 173, 181));
@@ -276,6 +323,110 @@ public class LibraryApp extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addBook(LibraryModel book){
+        DefaultTableModel model = (DefaultTableModel) tblBooks.getModel();
+        model.addRow(new Object[]{
+            book.getSn(),book.getBookTitle(),book.getAuthorName(),book.getPages(),book.isRead()
+        });
+    }
+
+    private void clear(){
+        txtFldBookId.setText("");
+        txtFldBookTitle.setText("");
+        txtFldAuthorName.setText("");
+        txtFldPages.setText("");
+    }
+    
+    private void btnAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBookActionPerformed
+        // TODO add your handling code here:
+        try{
+            int sn = Integer.parseInt(txtFldBookId.getText());
+            String bookTitle = txtFldBookTitle.getText();
+            String author = txtFldAuthorName.getText();
+            int pages = Integer.parseInt(txtFldPages.getText());
+            boolean status = chekBtnReadBook.isSelected();
+            
+            LibraryModel newBook = new LibraryModel(sn,bookTitle,author,pages,status);
+            bookList.add(newBook);
+            addBook(newBook);
+            clear();
+        }
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this,"Invalid value please try again!!","ALERT!",JOptionPane.WARNING_MESSAGE);
+            clear();
+        }
+    }//GEN-LAST:event_btnAddBookActionPerformed
+    
+    
+    
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        try{
+            int sn = Integer.parseInt(txtFldBookId.getText());
+            String bookTitle = txtFldBookTitle.getText();
+            String author = txtFldAuthorName.getText();
+            int pages = Integer.parseInt(txtFldPages.getText());
+            boolean status = chekBtnReadBook.isSelected();
+            
+            boolean exists=false;
+            
+            for(LibraryModel book: bookList){
+                if(sn==book.getSn()){
+                    exists=true;
+                    book.setBookTitle(bookTitle);
+                    book.setAuthorName(author);
+                    book.setPages(pages);
+                    book.setRead(status);
+                    break;
+                }
+            }
+            
+            if(exists){
+                DefaultTableModel model = (DefaultTableModel)tblBooks.getModel();
+                model.setRowCount(0);
+                for(LibraryModel book:bookList){
+                    model.addRow(new Object[]{
+                        book.getSn(),book.getBookTitle(),book.getAuthorName(),book.getPages(),book.isRead()
+                    });
+                }
+            }
+            clear();
+        }
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this,"Invalid value please try again!!","ALERT!",JOptionPane.WARNING_MESSAGE);
+            clear();
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        try{
+            int sn=Integer.parseInt(txtFldBookId.getText());
+            boolean exists=false;
+            for(int i=0;i<bookList.size();i++){
+                if(bookList.get(i).getSn()==sn){
+                    bookList.remove(i);
+                    exists=true;
+                    break;
+                }
+            }
+            
+            if(exists){
+                DefaultTableModel model = (DefaultTableModel)tblBooks.getModel();
+                model.setRowCount(0);
+                for(LibraryModel book:bookList){
+                    model.addRow(new Object[]{
+                        book.getSn(),book.getBookTitle(),book.getAuthorName(),book.getPages(),book.isRead()
+                    });
+                }
+            }
+        }
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this,"Invalid value please try again!!","ALERT!",JOptionPane.WARNING_MESSAGE);
+            clear();
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -314,19 +465,22 @@ public class LibraryApp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddBook;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JCheckBox chekBtnReadBook;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAddBook;
     private javax.swing.JLabel lblHeaderTop;
     private javax.swing.JPanel pnlBody;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlMain;
+    private javax.swing.JTable tblBooks;
     private javax.swing.JTextField txtFldAuthorName;
+    private javax.swing.JTextField txtFldBookId;
     private javax.swing.JTextField txtFldBookTitle;
     private javax.swing.JTextField txtFldPages;
     // End of variables declaration//GEN-END:variables

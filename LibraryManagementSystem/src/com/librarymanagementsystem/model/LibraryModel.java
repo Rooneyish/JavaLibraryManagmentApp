@@ -59,5 +59,5 @@ public class LibraryModel {
     public void setRead(boolean read) {
         this.read = read;
     }
-    
+
 }
