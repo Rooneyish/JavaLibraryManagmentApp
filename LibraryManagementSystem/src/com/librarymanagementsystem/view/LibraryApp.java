@@ -335,21 +335,40 @@ public class LibraryApp extends javax.swing.JFrame {
         txtFldBookTitle.setText("");
         txtFldAuthorName.setText("");
         txtFldPages.setText("");
+        chekBtnReadBook.setSelected(false);
     }
     
     private void btnAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBookActionPerformed
         // TODO add your handling code here:
         try{
+            boolean exists=false;
+            
             int sn = Integer.parseInt(txtFldBookId.getText());
             String bookTitle = txtFldBookTitle.getText();
             String author = txtFldAuthorName.getText();
             int pages = Integer.parseInt(txtFldPages.getText());
             boolean status = chekBtnReadBook.isSelected();
+            String readStatus= status?"Read":"Not Read";
             
-            LibraryModel newBook = new LibraryModel(sn,bookTitle,author,pages,status);
-            bookList.add(newBook);
-            addBook(newBook);
-            clear();
+            String normalizeInputTitle=bookTitle.replace("\\s", "").toLowerCase();
+            
+            for(LibraryModel book: bookList){
+                String normalizeBookTitle=book.getBookTitle().replace("\\s","").toLowerCase();
+                if(sn==book.getSn() || normalizeInputTitle.equals(normalizeBookTitle)){
+                    exists=true;
+                    break;
+                }
+            }
+            
+            if(!exists){
+                LibraryModel newBook = new LibraryModel(sn,bookTitle, author, pages, readStatus);
+                bookList.add(newBook);
+                addBook(newBook);
+                clear();
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"This Book already exists","ALERT!",JOptionPane.WARNING_MESSAGE);
+            }
         }
         catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this,"Invalid value please try again!!","ALERT!",JOptionPane.WARNING_MESSAGE);
@@ -367,16 +386,17 @@ public class LibraryApp extends javax.swing.JFrame {
             String author = txtFldAuthorName.getText();
             int pages = Integer.parseInt(txtFldPages.getText());
             boolean status = chekBtnReadBook.isSelected();
+            String readStatus = status?"Read":"Not Read";
             
             boolean exists=false;
             
             for(LibraryModel book: bookList){
                 if(sn==book.getSn()){
                     exists=true;
-                    book.setBookTitle(bookTitle);
-                    book.setAuthorName(author);
-                    book.setPages(pages);
-                    book.setRead(status);
+                    if(!bookTitle.isEmpty()) book.setBookTitle(bookTitle);
+                    if(!author.isEmpty()) book.setAuthorName(author);
+                    if(pages!=-1) book.setPages(pages);
+                    book.setRead(readStatus);
                     break;
                 }
             }
@@ -420,6 +440,10 @@ public class LibraryApp extends javax.swing.JFrame {
                     });
                 }
             }
+            else{
+                JOptionPane.showMessageDialog(this,"Book Id Not Found!!","ALERT!",JOptionPane.WARNING_MESSAGE);
+            }
+            clear();
         }
         catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this,"Invalid value please try again!!","ALERT!",JOptionPane.WARNING_MESSAGE);

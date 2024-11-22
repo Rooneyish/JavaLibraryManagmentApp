@@ -10,9 +10,9 @@ public class LibraryModel {
     private String bookTitle;
     private String authorName;
     private int pages;
-    private boolean read;
+    private String read;
 
-    public LibraryModel(int sn, String bookTitle, String authorName, int pages, boolean read) {
+    public LibraryModel(int sn, String bookTitle, String authorName, int pages, String read) {
         this.sn = sn;
         this.bookTitle = bookTitle;
         this.authorName = authorName;
@@ -52,11 +52,11 @@ public class LibraryModel {
         this.pages = pages;
     }
 
-    public boolean isRead() {
+    public String isRead() {
         return read;
     }
 
-    public void setRead(boolean read) {
+    public void setRead(String read) {
         this.read = read;
     }
 
